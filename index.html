@@ -85,6 +85,9 @@ main{padding:24px 0 64px}
 .blk h3{margin:0 0 10px;font-size:14px;text-transform:uppercase;letter-spacing:.07em;color:var(--navy);display:flex;justify-content:space-between;gap:10px}
 .blk h3 .ur{font-size:14px;text-transform:none;letter-spacing:0}
 .blk p{margin:0}
+.blk p+p{margin-top:10px}
+.blk li>ul{margin:4px 0 8px;color:var(--muted)}
+.txnote{color:var(--muted);font-size:13px;margin:0 0 10px}
 .blk ul{margin:0;padding-inline-start:20px}
 .blk li{margin:6px 0}
 .ai{display:grid;grid-template-columns:22px 1fr;gap:4px 10px;padding:10px 0;border-top:1px solid var(--line)}
@@ -141,7 +144,9 @@ const T = {
   back:['All meetings','تمام میٹنگز'], owner:['Owner','ذمہ دار'], due:['Due','آخری تاریخ'], private:['Private meetings','نجی میٹنگز'],
   vaultEnter:['Private meetings passcode','نجی میٹنگز کا پاس کوڈ'], lock:['Lock','بند کریں'], nPrivate:['No private meetings.','کوئی نجی میٹنگ نہیں۔'],
   updated:['Updates automatically','خودکار طور پر اپ ڈیٹ ہوتا ہے'], forget:['Forget passcode on this device','اس ڈیوائس پر پاس کوڈ بھول جائیں'],
-  copy:['Copy summary','خلاصہ کاپی کریں'], copied:['Copied','کاپی ہو گیا'], none2:['None recorded.','کچھ درج نہیں۔']
+  copy:['Copy summary','خلاصہ کاپی کریں'], copied:['Copied','کاپی ہو گیا'], none2:['None recorded.','کچھ درج نہیں۔'],
+  txnote:['As spoken in the meeting, transcribed by Fellow.','جیسے میٹنگ میں بولا گیا، فیلو کی ٹرانسکرپشن۔'],
+  txheld:['Transcript pending: being redone in Urdu script.','ٹرانسکرپٹ اردو رسم الخط میں دوبارہ تیار ہو رہا ہے۔']
 };
 const t = k => T[k][lang === 'ur' ? 1 : 0];
 const fmtDate = s => new Date(s).toLocaleString(lang === 'ur' ? 'ur-PK' : 'en-GB', {weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit'});
@@ -237,25 +242,32 @@ let txLang = null;
 function detailView(m, base) {
   const p = m.pack;
   txLang = txLang || lang;
-  const tx = (m.transcript[txLang] || m.transcript.en || []);
+  const have = ['en', 'ur'].filter(k => m.transcript[k] && m.transcript[k].length);
+  if (!have.includes(txLang)) txLang = have[0] || txLang;
+  const tx = m.transcript[txLang] || [];
   app.innerHTML = `<div class="detail">
     <a class="back" href="#${base === 'v' ? 'vault' : ''}">← ${base === 'v' ? t('private') : t('back')}</a>
     <h2 class="title"${dirAttr()}>${esc(L(p.title))}</h2>
     <div class="sub"><span>${fmtDate(m.started_at)}${m.ended_at ? '–' + fmtTime(m.ended_at) : ''}</span>${mins(m.started_at, m.ended_at) ? `<span>${mins(m.started_at, m.ended_at)} min</span>` : ''}</div>
     <div class="actions"><a class="btn" href="${esc(m.link)}" target="_blank" rel="noopener">▶ ${t('recording')}</a>
       <button class="btn" id="cp">${t('copy')}</button><button class="btn" onclick="print()">${t('print')}</button></div>
-    ${blk('summary', `<p${dirAttr()}>${esc(L(p.summary))}</p>`)}
+    ${blk('summary', `<div${dirAttr()}>${L(p.summary).split(/
+
++/).map(x => `<p>${esc(x)}</p>`).join('')}</div>`)}
     ${blk('decisions', list(p.decisions, d => `<li>${esc(L(d))}</li>`))}
     ${blk('actions', p.action_items && p.action_items.length ? `<div${dirAttr()}>${p.action_items.map(a => `<div class="ai"><span class="box"></span><span>${esc(L(a))}</span>${a.owner || a.due ? `<span class="who">${a.owner ? t('owner') + ': ' + esc(a.owner) : ''}${a.owner && a.due ? ' · ' : ''}${a.due ? t('due') + ': ' + esc(a.due) : ''}</span>` : ''}</div>`).join('')}</div>` : `<p style="color:var(--muted)">${t('none2')}</p>`)}
-    ${blk('topics', list(p.topics, d => `<li>${esc(L(d))}</li>`))}
+    ${blk('topics', list(p.topics, d => `<li><strong>${esc(L(d))}</strong>${d.pts && L(d.pts).length ? `<ul>${L(d.pts).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</li>`))}
     ${p.open_questions && p.open_questions.length ? blk('questions', list(p.open_questions, d => `<li>${esc(L(d))}</li>`)) : ''}
     ${p.next_meeting ? blk('next', `<p${dirAttr()}>${esc(L(p.next_meeting))}</p>`) : ''}
     <section class="card blk"><h3><span>${T.transcript[0]}</span><span class="ur">${T.transcript[1]}</span></h3>
-      <div class="tabs"><button id="te" class="${txLang === 'en' ? 'on' : ''}">English</button><button id="tu" class="urbtn ${txLang === 'ur' ? 'on' : ''}">اردو</button></div>
+      <p class="txnote"${dirAttr()}>${t(m.transcript.held ? 'txheld' : 'txnote')}</p>
+      ${have.length > 1 ? `<div class="tabs"><button id="te" class="${txLang === 'en' ? 'on' : ''}">English</button><button id="tu" class="urbtn ${txLang === 'ur' ? 'on' : ''}">اردو</button></div>` : ''}
       <div class="tx"${txLang === 'ur' ? ' lang="ur" dir="rtl"' : ''}>${tx.map(s => `<div class="seg-row"><span class="ts">${clock(s.start)}</span><div>${s.speaker ? `<div class="sp">${esc(s.speaker)}</div>` : ''}<div>${esc(s.text)}</div></div></div>`).join('')}</div>
     </section></div>`;
-  $('#te').onclick = () => { txLang = 'en'; detailView(m, base); };
-  $('#tu').onclick = () => { txLang = 'ur'; detailView(m, base); };
+  if (have.length > 1) {
+    $('#te').onclick = () => { txLang = 'en'; detailView(m, base); };
+    $('#tu').onclick = () => { txLang = 'ur'; detailView(m, base); };
+  }
   $('#cp').onclick = async () => {
     const txt = [L(p.title), '', L(p.summary), '', t('decisions') + ':', ...(p.decisions || []).map(d => '• ' + L(d)), '', t('actions') + ':',
       ...(p.action_items || []).map(a => '☐ ' + L(a) + (a.owner ? ` (${a.owner}${a.due ? ', ' + a.due : ''})` : ''))].join('\n');
