@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tti Boardroom</title>
+<link rel="icon" href="tti.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6fa; --card:#ffffff; --ink:#14213d; --muted:#5b6782; --line:#e2e7f0;
+  --navy:#1f3a8a; --blue:#2f63b5; --sky:#e8eff9; --ok:#167a4a; --warn:#a15c00; --live:#c62828;
+  --shadow:0 1px 2px rgba(20,33,61,.06),0 4px 16px rgba(20,33,61,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1424; --card:#151f35; --ink:#e7ecf6; --muted:#9aa7c2; --line:#26324d;
+  --navy:#8fb0ec; --blue:#7aa2e8; --sky:#1b2a48; --ok:#5fd29a; --warn:#f0b35a; --live:#ff6b6b;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1424; --card:#151f35; --ink:#e7ecf6; --muted:#9aa7c2; --line:#26324d;
+  --navy:#8fb0ec; --blue:#7aa2e8; --sky:#1b2a48; --ok:#5fd29a; --warn:#f0b35a; --live:#ff6b6b;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.ur,[lang=ur]{font-family:"Noto Nastaliq Urdu",serif;line-height:2.15;direction:rtl;text-align:right}
+a{color:var(--blue)}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header .wrap{display:flex;align-items:center;gap:12px;height:60px}
+header img{height:30px;width:auto}
+header h1{font-size:17px;margin:0;font-weight:700;color:var(--navy);letter-spacing:-.01em}
+header .sp{flex:1}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--bg)}
+.seg button{border:0;background:none;padding:6px 12px;color:var(--muted);font-size:13px;font-weight:600}
+.seg button.on{background:var(--navy);color:#fff}
+:root[data-theme="dark"] .seg button.on{color:#0d1424}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button.on{color:#0d1424}}
+.seg button.urbtn{font-family:"Noto Nastaliq Urdu",serif;font-weight:400;padding:2px 12px}
+main{padding:24px 0 64px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.gate{max-width:380px;margin:12vh auto 0;padding:28px;text-align:center}
+.gate img{height:54px}
+.gate h2{margin:14px 0 4px;font-size:20px}
+.gate p{color:var(--muted);margin:0 0 18px;font-size:14px}
+.gate input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px;text-align:center;letter-spacing:.06em}
+.gate input:focus{outline:2px solid var(--blue);outline-offset:1px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 14px;font-weight:600;font-size:14px;text-decoration:none}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff;width:100%;justify-content:center;margin-top:12px;padding:12px}
+:root[data-theme="dark"] .btn.primary{color:#0d1424}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#0d1424}}
+.err{color:var(--live);font-size:13px;min-height:20px;margin-top:8px}
+.section-h{display:flex;align-items:baseline;gap:10px;margin:28px 0 12px}
+.section-h h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0;font-weight:700}
+.section-h .ur{font-size:13px;color:var(--muted)}
+.now{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.now .card{padding:14px 16px}
+.now .t{font-weight:600}
+.now .w{color:var(--muted);font-size:13px}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--sky);color:var(--navy)}
+.pill.live{background:var(--live);color:#fff;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.pill.live{animation:none}}
+.search{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.list{display:grid;gap:12px;margin-top:12px}
+.item{display:block;padding:18px 20px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.item:hover{border-color:var(--blue);transform:translateY(-1px)}
+.item .top{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.item h3{margin:0;font-size:17px;flex:1;min-width:200px}
+.item .when{color:var(--muted);font-size:13px;white-space:nowrap}
+.item p{margin:8px 0 0;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item .meta{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.empty{padding:32px;text-align:center;color:var(--muted)}
+.back{display:inline-flex;gap:6px;color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+.detail h2.title{font-size:26px;line-height:1.25;margin:14px 0 4px;letter-spacing:-.015em}
+.detail .sub{color:var(--muted);font-size:14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px}
+.blk{padding:20px 22px;margin-top:14px}
+.blk h3{margin:0 0 10px;font-size:14px;text-transform:uppercase;letter-spacing:.07em;color:var(--navy);display:flex;justify-content:space-between;gap:10px}
+.blk h3 .ur{font-size:14px;text-transform:none;letter-spacing:0}
+.blk p{margin:0}
+.blk ul{margin:0;padding-inline-start:20px}
+.blk li{margin:6px 0}
+.ai{display:grid;grid-template-columns:22px 1fr;gap:4px 10px;padding:10px 0;border-top:1px solid var(--line)}
+.ai:first-of-type{border-top:0}
+.ai .box{width:16px;height:16px;border:2px solid var(--blue);border-radius:4px;margin-top:4px}
+.ai .who{grid-column:2;font-size:13px;color:var(--muted)}
+[dir=rtl] .ai .box{margin-top:12px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tabs button{border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:8px;padding:6px 12px;font-weight:600;font-size:13px}
+.tabs button.on{background:var(--sky);color:var(--navy);border-color:var(--blue)}
+.tabs .urbtn{font-family:"Noto Nastaliq Urdu",serif;font-weight:400;padding:0 12px}
+.seg-row{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.seg-row:first-child{border-top:0}
+.seg-row .ts{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;padding-top:3px;direction:ltr}
+.seg-row .sp{font-weight:600;font-size:13px;color:var(--navy)}
+.tx{max-height:70vh;overflow:auto}
+.foot{margin-top:40px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.foot button{background:none;border:0;color:var(--muted);text-decoration:underline;padding:0}
+.vaultbar{background:var(--navy);color:#fff;border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+:root[data-theme="dark"] .vaultbar{color:#0d1424}
+.vaultbar button{background:rgba(255,255,255,.15);border:0;color:inherit;border-radius:8px;padding:6px 10px;font-weight:600}
+@media (max-width:600px){.detail h2.title{font-size:21px} header h1 small{display:none} .seg-row{grid-template-columns:48px 1fr}}
+@media print{header,.actions,.foot,.back,.tabs{display:none!important} body{background:#fff} .card{box-shadow:none;border-color:#ccc} .tx{max-height:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <img src="tti.png" alt="Tti">
+  <h1>Boardroom <small style="font-weight:500;color:var(--muted)">meetings</small></h1>
+  <span class="sp"></span>
+  <div class="seg" role="group" aria-label="Language">
+    <button id="l-en" class="on">EN</button><button id="l-ur" class="urbtn">اردو</button>
+  </div>
+</div></header>
+<main><div class="wrap" id="app"></div></main>
+
+<script>
+const $ = s => document.querySelector(s);
+const app = $('#app');
+const store = {get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}}, del(k){try{localStorage.removeItem(k)}catch(e){}}};
+let lang = store.get('lang') || 'en';
+let K = null, keys = {}, index = null, vault = null, cache = {};
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const L = o => o ? (o[lang] || o.en || '') : '';
+const dirAttr = () => lang === 'ur' ? ' lang="ur" dir="rtl"' : '';
+const T = {
+  enter:['Enter the boardroom passcode','بورڈ روم پاس کوڈ درج کریں'], open:['Open','کھولیں'], wrong:['That passcode did not work.','یہ پاس کوڈ درست نہیں۔'],
+  now:['Now & next','ابھی اور آئندہ'], meetings:['Meetings','میٹنگز'], search:['Search meetings…','میٹنگز تلاش کریں…'],
+  none:['No meetings yet. Notes appear here a few minutes after a meeting ends.','ابھی کوئی میٹنگ نہیں۔ میٹنگ ختم ہونے کے چند منٹ بعد نوٹس یہاں آ جاتے ہیں۔'],
+  live:['Live','جاری'], summary:['Summary','خلاصہ'], decisions:['Decisions','فیصلے'], actions:['Action items','ایکشن آئٹمز'],
+  topics:['Discussion','گفتگو کے نکات'], questions:['Open questions','حل طلب سوالات'], next:['Next meeting','اگلی میٹنگ'],
+  transcript:['Transcript','ٹرانسکرپٹ'], recording:['Recording (boardroom Fellow login)','ریکارڈنگ (بورڈ روم فیلو لاگ اِن)'], print:['Print / PDF','پرنٹ / پی ڈی ایف'],
+  back:['All meetings','تمام میٹنگز'], owner:['Owner','ذمہ دار'], due:['Due','آخری تاریخ'], private:['Private meetings','نجی میٹنگز'],
+  vaultEnter:['Private meetings passcode','نجی میٹنگز کا پاس کوڈ'], lock:['Lock','بند کریں'], nPrivate:['No private meetings.','کوئی نجی میٹنگ نہیں۔'],
+  updated:['Updates automatically','خودکار طور پر اپ ڈیٹ ہوتا ہے'], forget:['Forget passcode on this device','اس ڈیوائس پر پاس کوڈ بھول جائیں'],
+  copy:['Copy summary','خلاصہ کاپی کریں'], copied:['Copied','کاپی ہو گیا'], none2:['None recorded.','کچھ درج نہیں۔']
+};
+const t = k => T[k][lang === 'ur' ? 1 : 0];
+const fmtDate = s => new Date(s).toLocaleString(lang === 'ur' ? 'ur-PK' : 'en-GB', {weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit'});
+const fmtTime = s => new Date(s).toLocaleTimeString(lang === 'ur' ? 'ur-PK' : 'en-GB', {hour:'numeric', minute:'2-digit'});
+const mins = (a, b) => b ? Math.max(1, Math.round((new Date(b) - new Date(a)) / 60000)) : null;
+const clock = sec => `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(Math.floor(sec % 60)).padStart(2, '0')}`;
+
+async function derive(pass, salt) {
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(salt), iterations:K.iter, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
+}
+async function open(path, key) {
+  const box = await (await fetch(`data/${path}?t=${Date.now()}`, {cache:'no-store'})).json();
+  const plain = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(box.iv)}, key, b64(box.ct));
+  const text = await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+  return JSON.parse(text);
+}
+
+function gate(kind, onOk) {
+  const isBoss = kind === 'boss';
+  app.innerHTML = `<div class="card gate"><img src="tti.png" alt="Tti">
+    <h2>${isBoss ? t('private') : 'Tti Boardroom'}</h2><p>${isBoss ? t('vaultEnter') : t('enter')}</p>
+    <form id="f"><input id="pw" type="password" autocomplete="current-password" autofocus aria-label="Passcode">
+    <button class="btn primary">${t('open')}</button><div class="err" id="er"></div></form>
+    ${isBoss ? `<p style="margin-top:14px"><a href="#" id="cancel">${t('back')}</a></p>` : ''}</div>`;
+  $('#f').onsubmit = async e => {
+    e.preventDefault();
+    const pw = $('#pw').value.trim();
+    try { await onOk(pw); } catch (err) { $('#er').textContent = t('wrong'); $('#pw').select(); }
+  };
+  if (isBoss) $('#cancel').onclick = e => { e.preventDefault(); location.hash = ''; };
+}
+
+async function unlockCompany(pw) {
+  const key = await derive(pw, K.company);
+  index = await open('index.enc', key);
+  keys.company = key; store.set('pc', pw); route();
+}
+async function unlockBoss(pw) {
+  const key = await derive(pw, K.boss);
+  vault = await open('vault.enc', key);
+  keys.boss = key; route();
+}
+
+function card(m, base) {
+  return `<a class="card item" href="#${base}/${encodeURIComponent(m.file)}">
+    <div class="top"><h3${dirAttr()}>${esc(L(m.title))}</h3><span class="when">${fmtDate(m.started_at)}${mins(m.started_at, m.ended_at) ? ' · ' + mins(m.started_at, m.ended_at) + ' min' : ''}</span></div>
+    <p${dirAttr()}>${esc(L(m.summary))}</p>
+    <div class="meta">${m.n_decisions ? `<span class="pill">${m.n_decisions} ${t('decisions')}</span>` : ''}${m.n_actions ? `<span class="pill">${m.n_actions} ${t('actions')}</span>` : ''}</div></a>`;
+}
+
+function listView(q = '') {
+  const now = Date.now();
+  const up = (index.upcoming || []).filter(u => new Date(u.end || u.start) > now).slice(0, 6);
+  const ql = q.toLowerCase();
+  const ms = index.meetings.filter(m => !ql || [m.title.en, m.title.ur, m.summary.en, m.summary.ur].join(' ').toLowerCase().includes(ql));
+  app.innerHTML = `
+    ${up.length ? `<div class="section-h"><h2>${t('now')}</h2></div><div class="now">${up.map(u => {
+      const live = new Date(u.start) <= now && now < new Date(u.end || u.start);
+      return `<div class="card"><div class="t">${esc(u.title)}</div><div class="w">${live ? `<span class="pill live">${t('live')}</span> ` : ''}${fmtDate(u.start)}${u.end ? '–' + fmtTime(u.end) : ''}</div></div>`;
+    }).join('')}</div>` : ''}
+    <div class="section-h"><h2>${t('meetings')}</h2></div>
+    <input class="search" id="q" type="search" placeholder="${t('search')}" value="${esc(q)}"${dirAttr()}>
+    <div class="list">${ms.length ? ms.map(m => card(m, 'm')).join('') : `<div class="card empty">${t('none')}</div>`}</div>
+    ${foot()}`;
+  const qi = $('#q'); qi.oninput = () => { listView(qi.value); const n = $('#q'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
+  bindFoot();
+}
+
+function vaultView() {
+  app.innerHTML = `<div class="vaultbar"><strong>🔒 ${t('private')}</strong><button id="lk">${t('lock')}</button></div>
+    <div class="list">${vault.meetings.length ? vault.meetings.map(m => card(m, 'v')).join('') : `<div class="card empty">${t('nPrivate')}</div>`}</div>
+    <p style="margin-top:20px"><a class="back" href="#">← ${t('back')}</a></p>`;
+  $('#lk').onclick = () => { keys.boss = null; vault = null; location.hash = ''; };
+}
+
+function foot() {
+  return `<div class="foot"><span>${t('updated')}</span><span><button id="pv">🔒 ${t('private')}</button> · <button id="fg">${t('forget')}</button></span></div>`;
+}
+function bindFoot() {
+  $('#pv').onclick = () => location.hash = 'vault';
+  $('#fg').onclick = () => { store.del('pc'); keys = {}; index = null; route(); };
+}
+
+function list(items, render) {
+  return items && items.length ? `<ul${dirAttr()}>${items.map(render).join('')}</ul>` : `<p style="color:var(--muted)">${t('none2')}</p>`;
+}
+function blk(key, body) {
+  return `<section class="card blk"><h3><span>${T[key][0]}</span><span class="ur">${T[key][1]}</span></h3>${body}</section>`;
+}
+
+let txLang = null;
+function detailView(m, base) {
+  const p = m.pack;
+  txLang = txLang || lang;
+  const tx = (m.transcript[txLang] || m.transcript.en || []);
+  app.innerHTML = `<div class="detail">
+    <a class="back" href="#${base === 'v' ? 'vault' : ''}">← ${base === 'v' ? t('private') : t('back')}</a>
+    <h2 class="title"${dirAttr()}>${esc(L(p.title))}</h2>
+    <div class="sub"><span>${fmtDate(m.started_at)}${m.ended_at ? '–' + fmtTime(m.ended_at) : ''}</span>${mins(m.started_at, m.ended_at) ? `<span>${mins(m.started_at, m.ended_at)} min</span>` : ''}</div>
+    <div class="actions"><a class="btn" href="${esc(m.link)}" target="_blank" rel="noopener">▶ ${t('recording')}</a>
+      <button class="btn" id="cp">${t('copy')}</button><button class="btn" onclick="print()">${t('print')}</button></div>
+    ${blk('summary', `<p${dirAttr()}>${esc(L(p.summary))}</p>`)}
+    ${blk('decisions', list(p.decisions, d => `<li>${esc(L(d))}</li>`))}
+    ${blk('actions', p.action_items && p.action_items.length ? `<div${dirAttr()}>${p.action_items.map(a => `<div class="ai"><span class="box"></span><span>${esc(L(a))}</span>${a.owner || a.due ? `<span class="who">${a.owner ? t('owner') + ': ' + esc(a.owner) : ''}${a.owner && a.due ? ' · ' : ''}${a.due ? t('due') + ': ' + esc(a.due) : ''}</span>` : ''}</div>`).join('')}</div>` : `<p style="color:var(--muted)">${t('none2')}</p>`)}
+    ${blk('topics', list(p.topics, d => `<li>${esc(L(d))}</li>`))}
+    ${p.open_questions && p.open_questions.length ? blk('questions', list(p.open_questions, d => `<li>${esc(L(d))}</li>`)) : ''}
+    ${p.next_meeting ? blk('next', `<p${dirAttr()}>${esc(L(p.next_meeting))}</p>`) : ''}
+    <section class="card blk"><h3><span>${T.transcript[0]}</span><span class="ur">${T.transcript[1]}</span></h3>
+      <div class="tabs"><button id="te" class="${txLang === 'en' ? 'on' : ''}">English</button><button id="tu" class="urbtn ${txLang === 'ur' ? 'on' : ''}">اردو</button></div>
+      <div class="tx"${txLang === 'ur' ? ' lang="ur" dir="rtl"' : ''}>${tx.map(s => `<div class="seg-row"><span class="ts">${clock(s.start)}</span><div>${s.speaker ? `<div class="sp">${esc(s.speaker)}</div>` : ''}<div>${esc(s.text)}</div></div></div>`).join('')}</div>
+    </section></div>`;
+  $('#te').onclick = () => { txLang = 'en'; detailView(m, base); };
+  $('#tu').onclick = () => { txLang = 'ur'; detailView(m, base); };
+  $('#cp').onclick = async () => {
+    const txt = [L(p.title), '', L(p.summary), '', t('decisions') + ':', ...(p.decisions || []).map(d => '• ' + L(d)), '', t('actions') + ':',
+      ...(p.action_items || []).map(a => '☐ ' + L(a) + (a.owner ? ` (${a.owner}${a.due ? ', ' + a.due : ''})` : ''))].join('\n');
+    try { await navigator.clipboard.writeText(txt); $('#cp').textContent = t('copied'); } catch (e) {}
+  };
+  scrollTo(0, 0);
+}
+
+async function route() {
+  document.documentElement.lang = lang;
+  $('#l-en').classList.toggle('on', lang === 'en'); $('#l-ur').classList.toggle('on', lang === 'ur');
+  if (!K) K = await (await fetch('data/k.json?t=' + Date.now(), {cache:'no-store'})).json();
+  if (!keys.company) {
+    const saved = store.get('pc');
+    if (saved) { try { await unlockCompany(saved); return; } catch (e) { store.del('pc'); } }
+    return gate('company', unlockCompany);
+  }
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h === 'vault' || h.startsWith('v/')) {
+    if (!keys.boss) return gate('boss', unlockBoss);
+    if (h === 'vault') return vaultView();
+    return detailView(cache[h] || (cache[h] = await open(h, keys.boss)), 'v');
+  }
+  if (h.startsWith('m/')) { txLang = null; return detailView(cache[h] || (cache[h] = await open(h, keys.company)), 'm'); }
+  listView();
+}
+$('#l-en').onclick = () => { lang = 'en'; store.set('lang', lang); txLang = null; route(); };
+$('#l-ur').onclick = () => { lang = 'ur'; store.set('lang', lang); txLang = null; route(); };
+addEventListener('hashchange', () => { txLang = null; route(); });
+setInterval(async () => {   // pick up new meetings without a reload
+  if (!keys.company || location.hash) return;
+  try { index = await open('index.enc', keys.company); if (!document.activeElement || document.activeElement.id !== 'q') listView(); } catch (e) {}
+}, 120000);
+route().catch(e => app.innerHTML = `<div class="card empty">Could not load: ${esc(e.message)}</div>`);
+</script>
+</body>
+</html>
