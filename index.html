@@ -207,7 +207,7 @@ function listView(q = '') {
   app.innerHTML = `
     ${up.length ? `<div class="section-h"><h2>${t('now')}</h2></div><div class="now">${up.map(u => {
       const live = new Date(u.start) <= now && now < new Date(u.end || u.start);
-      return `<div class="card"><div class="t">${esc(u.title)}</div><div class="w">${live ? `<span class="pill live">${t('live')}</span> ` : ''}${fmtDate(u.start)}${u.end ? '–' + fmtTime(u.end) : ''}</div></div>`;
+      return `<div class="card"><div class="t">${esc(u.title)}</div><div class="w">${live ? `<span class="pill live">${t('live')}</span> ` : ''}<bdi>${fmtDate(u.start)}</bdi>${u.end ? '–<bdi>' + fmtTime(u.end) + '</bdi>' : ''}</div></div>`;
     }).join('')}</div>` : ''}
     <div class="section-h"><h2>${t('meetings')}</h2></div>
     <input class="search" id="q" type="search" placeholder="${t('search')}" value="${esc(q)}"${dirAttr()}>
@@ -249,7 +249,7 @@ function detailView(m, base) {
   app.innerHTML = `<div class="detail">
     <a class="back" href="#${base === 'v' ? 'vault' : ''}">← ${base === 'v' ? t('private') : t('back')}</a>
     <h2 class="title"${dirAttr()}>${esc(L(p.title))}</h2>
-    <div class="sub"><span>${fmtDate(m.started_at)}${m.ended_at ? '–' + fmtTime(m.ended_at) : ''}</span>${mins(m.started_at, m.ended_at) ? `<span>${mins(m.started_at, m.ended_at)} min</span>` : ''}</div>
+    <div class="sub"><span><bdi>${fmtDate(m.started_at)}</bdi>${m.ended_at ? '–<bdi>' + fmtTime(m.ended_at) + '</bdi>' : ''}</span>${mins(m.started_at, m.ended_at) ? `<span><bdi>${mins(m.started_at, m.ended_at)} min</bdi></span>` : ''}</div>
     <div class="actions"><a class="btn" href="${esc(m.link)}" target="_blank" rel="noopener">▶ ${t('recording')}</a>
       <button class="btn" id="cp">${t('copy')}</button><button class="btn" onclick="print()">${t('print')}</button></div>
     ${blk('summary', `<div${dirAttr()}>${L(p.summary).split(/\n\n+/).map(x => `<p>${esc(x)}</p>`).join('')}</div>`)}
